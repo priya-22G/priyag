@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priya Portfolio | Creative Dev</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- COLORFUL & MODERN FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            /* Vibrant Palette */
+            --bg-deep: #0f0c29;
+            --gradient-1: #ff0080; /* Hot Pink */
+            --gradient-2: #7928ca; /* Purple */
+            --gradient-3: #00d2ff; /* Cyan */
+            
+            --text-main: #ffffff;
+            --text-muted: #e0e0e0;
+            
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 1. UNIQUE ANIMATED GRADIENT BACKGROUND --- */
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #5d26c1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Colorful Orbs with Blend Modes */
+        .orb-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.7;
+            animation: floatOrb 10s infinite alternate ease-in-out;
+            mix-blend-mode: screen; /* Makes colors blend like light */
+        }
+
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: var(--gradient-1);
+            top: 10%; left: 10%;
+            animation-duration: 12s;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: var(--gradient-3);
+            bottom: 5%; right: 5%;
+            animation-duration: 15s;
+        }
+
+        .orb-3 {
+            width: 300px; height: 300px;
+            background: var(--gradient-2);
+            top: 40%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 9s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 30px) scale(1.2); }
+        }
+
+        /* --- 2. NAVIGATION (VIBRANT GLASS) --- */
+        header {
+            padding: 25px 50px;
+            display: flex;
+            justify-content: center; /* Centered nav */
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .nav-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            padding: 12px 50px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            width: 100%;
+            max-width: 1100px;
+            transition: 0.3s;
+        }
+
+        .nav-container:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(121, 40, 202, 0.25);
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.8);
+            object-fit: cover;
+        }
+
+        nav ul { display: flex; gap: 30px; }
+        
+        nav ul li a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-3));
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* --- 3. HERO SECTION --- */
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        
+        .hero-section {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10%;
+            gap: 80px;
+            position: relative;
+        }
+
+        .content { flex: 1; z-index: 2; }
+        .image { flex: 1; display: flex; justify-content: flex-end; z-index: 2; }
+
+        /* TYPOGRAPHY: Gradient Text */
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 5.5rem;
+            line-height: 0.95;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+        
+        h1 span {
+            background: linear-gradient(135deg, #fff 30%, var(--gradient-3) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        p { 
+            color: var(--text-muted); 
+            margin-bottom: 40px; 
+            max-width: 520px; 
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* COLORFUL BUTTONS */
+        .cta-buttons { display: flex; gap: 20px; }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn.primary {
+            background: linear-gradient(90deg, var(--gradient-2), var(--gradient-1));
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(255, 0, 128, 0.3);
+        }
+
+        .btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 0, 128, 0.5);
+        }
+
+        .btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #fff;
+        }
+
+        /* HERO IMAGE: Vibrant Glow Ring */
+        .img-wrapper {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Glowing Gradient Border */
+        .img-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--gradient-1), var(--gradient-3), var(--gradient-2), var(--gradient-1));
+            filter: blur(15px);
+            z-index: 1;
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            border: 4px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Overlay on image to make it pop */
+        .img-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 60%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* --- 4. HIGHLIGHTS (Rainbow Glass Cards) --- */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px 10% 100px;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 24px;
+            position: relative;
+            transition: 0.4s;
+            overflow: hidden;
+        }
+
+        /* Colorful top border */
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-3));
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .highlight-card i {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--gradient-3), var(--gradient-1));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .highlight-card h3 { 
+            font-family: 'Outfit', sans-serif; 
+            font-size: 1.5rem; 
+            margin-bottom: 12px; 
+            color: #fff;
+        }
+        
+        .highlight-card p { font-size: 0.95rem; margin: 0; color: #ccc; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .social-links { margin-bottom: 20px; }
+        
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: 0.3s;
+            color: #fff;
+            border: 1px solid transparent;
+        }
+
+        .social-links a:hover {
+            background: #fff;
+            color: var(--bg-deep);
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero-section { flex-direction: column-reverse; text-align: center; padding-top: 120px; gap: 60px; }
+            h1 { font-size: 3.5rem; }
+            .nav-container { flex-direction: column; gap: 20px; border-radius: 30px; width: 90%; }
+            .img-wrapper { width: 280px; height: 280px; }
+            .cta-buttons { justify-content: center; }
+            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Colorful Background Layers -->
+    <div class="animated-bg"></div>
+    <div class="orb-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="c:\Users\admin\Desktop\priya.g.jpeg" alt="priya.g" onerror="this.src='https://via.placeholder.com/50'">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="education.html">Education</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="content">
+                <h1>Hi, I'm <span>priya</span></h1>
+                <h2 id="typewriter"></h2>
+                <p>
+                    I craft digital experiences that blend vibrant creativity with robust engineering. 
+                    Building web applications that are not just functional, but unforgettable.
+                </p>
+                <div class="cta-buttons">
+                    <a href="projects.html" class="btn primary">View Work</a>
+                    <a href="c:\Users\admin\Downloads\resume.docx" class="btn secondary">Resume</a>
+                </div>
+            </div>
+            
+            <div class="image">
+                <div class="img-wrapper">
+                    <!-- Keeping your local path, with fallback -->
+                    <img src="C:\Users\admin\Pictures\priya\p4.jpeg" alt="priya" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                </div>
+            </div>
+        </section>
+
+        <section class="highlights">
+            <div class="highlight-card">
+                <i class="fas fa-code"></i>
+                <h3>Clean Code</h3>
+                <p>Writing scalable, efficient, and maintainable code with modern standards.</p>
+            </div>
+            <div class="highlight-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>Creative UI</h3>
+                <p>Designing interfaces that pop with color and guide the user intuitively.</p>
+            </div>
+            <div class="highlight-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Performance</h3>
+                <p>Optimizing every pixel for speed and smooth animations.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:example@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p style="color: #aaa; font-size: 0.8rem; letter-spacing: 1px;">&copy; 2025 PRIYA.DEV // COLORFUL & CREATIVE</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT: TYPING EFFECT -->
+    <script>
+        const textToType = "Full Stack Developer";
+        const typeContainer = document.getElementById("typewriter");
+        let index = 0;
+
+        function typeWriter() {
+            if (index < textToType.length) {
+                typeContainer.innerHTML += textToType.charAt(index);
+                index++;
+                // Random typing speed for realism
+                setTimeout(typeWriter, Math.random() * 100 + 50);
+            } else {
+                // Optional: Remove cursor or keep blinking
+            }
+        }
+
+        window.onload = () => {
+            setTimeout(typeWriter, 500); 
+        };
+    </script>
+</body>
+</html>

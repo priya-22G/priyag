@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education | My Portfolio</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES (Consistent with previous pages) --- */
+        :root {
+            --bg-dark: #0f1014;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-1: #ff0055; /* Pink */
+            --accent-2: #00f3ff; /* Cyan */
+            --accent-3: #7000ff; /* Purple */
+        }
+
+        /* --- RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 1. BACKGROUND ANIMATION --- */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: floatOrb 15s infinite alternate ease-in-out;
+        }
+
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-3); top: -100px; left: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--accent-1); bottom: 10%; right: -50px; animation-delay: -5s; }
+        .orb-3 { width: 200px; height: 200px; background: var(--accent-2); top: 40%; left: 50%; transform: translate(-50%, -50%); animation-duration: 20s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.2); }
+        }
+
+        /* --- 2. NAVIGATION (Pill Style) --- */
+        header {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        nav ul {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            gap: 5px;
+        }
+
+        nav ul li a {
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        nav ul li a.active {
+            background: var(--accent-2);
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* --- 3. MAIN CONTENT --- */
+        .edu-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            width: 100%;
+        }
+
+        .intro-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        h1 span { font-style: italic; color: var(--accent-2); }
+
+        .intro-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- 4. VERTICAL TIMELINE DESIGN --- */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1); /* The Line */
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        /* The glowing dot on the line */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px; /* Adjust based on padding + border */
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-2);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-2);
+            z-index: 2;
+        }
+
+        .edu-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edu-card:hover {
+            transform: translateX(10px);
+            border-color: var(--accent-2);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.1);
+        }
+
+        /* Card Content Styling */
+        .date-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            float: right;
+            background: rgba(0, 243, 255, 0.2);
+            color: var(--accent-2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--accent-2);
+        }
+
+        .edu-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .edu-card .college-name {
+            color: #ccc;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .score-box {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .score-box i { color: var(--accent-3); }
+        .score-box strong { color: #fff; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--glass-border);
+            background: rgba(0,0,0,0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            nav ul { gap: 5px; padding: 5px 15px; }
+            nav ul li a { padding: 5px 10px; font-size: 0.8rem; }
+            .edu-container { padding: 40px 15px; }
+            .timeline { padding-left: 20px; }
+            .timeline-item::before { left: -27px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="education.html" class="active">Education</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="edu-container">
+        
+        <div class="intro-header">
+            <h1>My <span>Journey</span></h1>
+            <p>Hello! I'm <strong>Guttula Priya</strong>. I am currently pursuing my studies and have completed my previous education with good performance.</p>
+        </div>
+
+        <!-- Vertical Timeline -->
+        <div class="timeline">
+            
+            <!-- Education 1: Current -->
+            <div class="timeline-item">
+                <div class="edu-card">
+                    <span class="date-badge">2023 - 2026</span>
+                    <span class="status-badge">Currently Pursuing</span>
+                    <h3>Bachelor of Science (BSc)</h3>
+                    <span class="college-name">Aditya Degree College, Amalapuram</span>
+                    
+                    <div class="score-box">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>
+                            <small>Aggregate Score</small><br>
+                            <strong>83.3%</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education 2: Intermediate -->
+            <div class="timeline-item">
+                <div class="edu-card">
+                    <span class="date-badge">2021 - 2023</span>
+                    <span class="status-badge" style="background: rgba(255,255,255,0.1); color: #aaa; border-color: transparent;">Completed</span>
+                    <h3>Intermediate (Class 12)</h3>
+                    <span class="college-name">Aditya Junior College, Amalapuram</span>
+                    
+                    <div class="score-box">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <small>Aggregate Score</small><br>
+                            <strong>75.7%</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education 3: SSC -->
+            <div class="timeline-item">
+                <div class="edu-card">
+                    <span class="date-badge">Completed</span>
+                    <span class="status-badge" style="background: rgba(255,255,255,0.1); color: #aaa; border-color: transparent;">Completed</span>
+                    <h3>SSC (Class 10)</h3>
+                    <span class="college-name">ZPPH School, Indhupalli</span>
+                    
+                    <div class="score-box">
+                        <i class="fas fa-award"></i>
+                        <div>
+                            <small>Aggregate Score</small><br>
+                            <strong>93%</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Guttula Priya. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
